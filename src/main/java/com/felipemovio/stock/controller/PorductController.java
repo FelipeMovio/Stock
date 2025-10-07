@@ -19,8 +19,7 @@ public class PorductController {
     private ProductRepository repository;
 
     @GetMapping
-    public List<Product> verProdutos(Product product){
-        return repository.findAll(product);
+
     }
 
 }
