@@ -16,8 +16,8 @@ public class ProductService {
     private ProductRepository repository;
 
     // ver itens listas
-    public List<Product> verProdutos(Product product){
-        List<Product> produtos = repository.findAll();
-        return produtos.stream().map(Product::new).toList();
+    public List<Product> verProdutos(){
+       return repository.findAll();
+
     }
 }
