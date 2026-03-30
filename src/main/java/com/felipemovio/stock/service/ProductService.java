@@ -1,5 +1,6 @@
 package com.felipemovio.stock.service;
 
+import com.felipemovio.stock.dto.ProductResponseDTO;
 import com.felipemovio.stock.model.Product;
 import com.felipemovio.stock.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +17,11 @@ public class ProductService {
     private ProductRepository repository;
 
     // ver itens listas
-    public List<Product> verProdutos(){
-       return repository.findAll();
+    public List<ProductResponseDTO> verProdutos(){
+     return repository.findAll()
+             .stream()
+             .map(ProductResponseDTO ::new)
+             .toList();
 
     }
 }

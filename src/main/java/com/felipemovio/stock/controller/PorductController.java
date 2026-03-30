@@ -1,5 +1,6 @@
 package com.felipemovio.stock.controller;
 
+import com.felipemovio.stock.dto.ProductResponseDTO;
 import com.felipemovio.stock.model.Product;
 import com.felipemovio.stock.repository.ProductRepository;
 import com.felipemovio.stock.service.ProductService;
@@ -21,8 +22,8 @@ public class PorductController {
     private ProductService service;
 
     @GetMapping
-    public ResponseEntity<List<Product>> verTodosProdutos(){
-        List<Product> produtos = service.verProdutos();
+    public ResponseEntity<List<ProductResponseDTO>> verTodosProdutos(){
+        List<ProductResponseDTO> produtos = service.verProdutos();
         return ResponseEntity.ok(produtos);
     }
 
