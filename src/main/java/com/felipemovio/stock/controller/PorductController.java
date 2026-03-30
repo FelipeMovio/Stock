@@ -4,6 +4,7 @@ import com.felipemovio.stock.dto.ProductResponseDTO;
 import com.felipemovio.stock.model.Product;
 import com.felipemovio.stock.repository.ProductRepository;
 import com.felipemovio.stock.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.query.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/Product")
+@RequiredArgsConstructor
 public class PorductController {
 
-    @Autowired
-    private ProductService service;
+
+    private final ProductService service;
 
     @GetMapping
     public ResponseEntity<List<ProductResponseDTO>> verTodosProdutos(){
