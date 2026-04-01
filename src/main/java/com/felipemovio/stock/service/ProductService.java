@@ -13,8 +13,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductService {
 
-    @Autowired
-    private ProductRepository repository;
+
+    private final ProductRepository repository;
+
+    //criar
+
+
 
     // ver itens listas
     public List<ProductResponseDTO> verProdutos(){
@@ -24,4 +28,8 @@ public class ProductService {
              .toList();
 
     }
+
+    //
+
+
 }
