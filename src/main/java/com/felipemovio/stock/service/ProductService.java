@@ -7,8 +7,8 @@ import com.felipemovio.stock.exception.NotFoundException;
 import com.felipemovio.stock.model.Product;
 import com.felipemovio.stock.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +20,7 @@ public class ProductService {
     private final ProductRepository repository;
 
     //criar
+    @Transactional
     public ProductResponseDTO criar(ProductRequestDTO dto){
         Product product = new Product(null, dto.name(), dto.price(), dto.quantity());
 
@@ -47,22 +48,37 @@ public class ProductService {
     }
 
     // atualizar algum campo
+    @Transactional
     public ProductResponseDTO atualizar(ProductAtualizarDTO dto, Integer id) throws NotFoundException {
-        Product atualixado = repository.findById(id)
+        Product atualizado = repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Produto ao encontrado"));
 
-        atualixado.setName(dto.name());
-        atualixado.setPrice(dto.price());
-        atualixado.setQuantity(dto.quantity());
+        if (dto.name() != null) {
+            atualizado.setName(dto.name());
+        }
+        if (dto.price() != null) {
+            atualizado.setPrice(dto.price());
+        }
+        if (dto.quantity() != null) {
+            atualizado.setQuantity(dto.quantity());
+        }
 
-        return new ProductResponseDTO(atualixado);
+        atualizado.setName(dto.name());
+        atualizado.setPrice(dto.price());
+        atualizado.setQuantity(dto.quantity());
+
+        return new ProductResponseDTO(atualizado);
 
     }
 
-    // deletar
 
-    public void deletar(Integer id){
-        repository.deleteById(id);
+    // deletar
+    @Transactional
+    public void deletar(Integer id) throws NotFoundException {
+        Product product = repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Produto não encontrado"));
+
+        repository.delete(product);
     }
 
 
