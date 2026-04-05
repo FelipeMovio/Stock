@@ -9,6 +9,8 @@ import com.felipemovio.stock.service.ProductService;
 import lombok.RequiredArgsConstructor;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +27,8 @@ public class ProductController {
     private final ProductService service;
 
     @GetMapping
-    public ResponseEntity<List<ProductResponseDTO>> verTodosProdutos(){
-        List<ProductResponseDTO> produtos = service.verProdutos();
+    public ResponseEntity<Page<ProductResponseDTO>> verTodosProdutos(Pageable pageable){
+        Page<ProductResponseDTO> produtos = service.verProdutos(pageable);
         return ResponseEntity.ok(produtos);
     }
 

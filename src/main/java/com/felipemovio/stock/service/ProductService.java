@@ -7,6 +7,8 @@ import com.felipemovio.stock.exception.NotFoundException;
 import com.felipemovio.stock.model.Product;
 import com.felipemovio.stock.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,11 +33,9 @@ public class ProductService {
 
 
     // ver itens listas
-    public List<ProductResponseDTO> verProdutos(){
-     return repository.findAll()
-             .stream()
-             .map(ProductResponseDTO ::new)
-             .toList();
+    public Page<ProductResponseDTO> verProdutos(Pageable pageable){
+     return repository.findAll(pageable)
+             .map(ProductResponseDTO ::new);
 
     }
 
