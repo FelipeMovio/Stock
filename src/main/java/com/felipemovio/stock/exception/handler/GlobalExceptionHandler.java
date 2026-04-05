@@ -2,10 +2,13 @@ package com.felipemovio.stock.exception.handler;
 
 import com.felipemovio.stock.exception.ErrorResponse;
 import com.felipemovio.stock.exception.NotFoundException;
+import com.felipemovio.stock.exception.PageSizeExceededException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.time.LocalDateTime;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -28,5 +31,16 @@ public class GlobalExceptionHandler {
                 .build();
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
+
+    @ExceptionHandler(PageSizeExceededException.class)
+    public ResponseEntity<ErrorResponse> handlePageSizeExceeded(PageSizeExceededException ex) {
+
+        ErrorResponse response = ErrorResponse.builder()
+                .message(ex.getMessage())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 }

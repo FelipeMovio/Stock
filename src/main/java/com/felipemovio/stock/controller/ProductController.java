@@ -6,6 +6,7 @@ import com.felipemovio.stock.dto.ProductResponseDTO;
 import com.felipemovio.stock.dto.ProductResponseMiniDTO;
 import com.felipemovio.stock.exception.NotFoundException;
 
+import com.felipemovio.stock.exception.PageSizeExceededException;
 import com.felipemovio.stock.service.ProductService;
 import lombok.RequiredArgsConstructor;
 
@@ -31,7 +32,7 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<Page<ProductResponseMiniDTO>> verTodosProdutos (@PageableDefault(size = 10) Pageable pageable){
         if (pageable.getPageSize() > 50) {
-            throw new IllegalArgumentException("Tamanho máximo da página é 50");
+            throw new PageSizeExceededException("Tamanho máximo da página é 50");
         }
         Page<ProductResponseMiniDTO> produtos = service.verProdutos(pageable);
         return ResponseEntity.ok(produtos);
