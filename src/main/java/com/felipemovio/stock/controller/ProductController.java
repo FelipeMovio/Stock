@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class ProductController {
     private final ProductService service;
 
     @GetMapping
-    public ResponseEntity<Page<ProductResponseDTO>> verTodosProdutos(Pageable pageable){
+    public ResponseEntity<Page<ProductResponseDTO>> verTodosProdutos (@PageableDefault(size = 10) Pageable pageable){
         Page<ProductResponseDTO> produtos = service.verProdutos(pageable);
         return ResponseEntity.ok(produtos);
     }
