@@ -5,6 +5,7 @@ import com.felipemovio.stock.dto.ProductRequestDTO;
 import com.felipemovio.stock.dto.ProductResponseDTO;
 import com.felipemovio.stock.dto.ProductResponseMiniDTO;
 import com.felipemovio.stock.exception.NotFoundException;
+import com.felipemovio.stock.exception.PageSizeExceededException;
 import com.felipemovio.stock.model.Product;
 import com.felipemovio.stock.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,8 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -35,8 +34,15 @@ public class ProductService {
 
     // ver itens listas
     public Page<ProductResponseMiniDTO> verProdutos(Pageable pageable){
-     return repository.findAll(pageable)
-             .map(ProductResponseMiniDTO ::new);
+
+        int size = pageable.getPageSize();
+
+        if (size < 1 || size > 50) {
+            throw new PageSizeExceededException("O tamanho da página deve estar entre 1 e 50");
+        }
+         return repository.findAll(pageable)
+                 .map(ProductResponseMiniDTO ::new);
+
 
     }
 

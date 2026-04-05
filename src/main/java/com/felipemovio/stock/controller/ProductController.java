@@ -31,9 +31,6 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<Page<ProductResponseMiniDTO>> verTodosProdutos (@PageableDefault(size = 10) Pageable pageable){
-        if (pageable.getPageSize() > 50) {
-            throw new PageSizeExceededException("Tamanho máximo da página é 50");
-        }
         Page<ProductResponseMiniDTO> produtos = service.verProdutos(pageable);
         return ResponseEntity.ok(produtos);
     }
