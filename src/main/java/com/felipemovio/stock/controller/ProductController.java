@@ -43,7 +43,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductResponseDTO> criar(@RequestBody ProductRequestDTO dto){
+    public ResponseEntity<ProductResponseDTO> criar(@RequestBody ProductRequestDTO dto) throws NotFoundException {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(dto));
     }

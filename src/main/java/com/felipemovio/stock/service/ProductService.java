@@ -23,7 +23,11 @@ public class ProductService {
 
     //criar
     @Transactional
-    public ProductResponseDTO criar(ProductRequestDTO dto){
+    public ProductResponseDTO criar(ProductRequestDTO dto) throws NotFoundException {
+        if (dto.name() == null || dto.price() == null || dto.quantity() == null){
+            throw new NotFoundException("Os valores nao podem ser nulos ");
+        }
+
         Product product = new Product(null, dto.name(), dto.price(), dto.quantity());
 
         Product saved = repository.save(product);
