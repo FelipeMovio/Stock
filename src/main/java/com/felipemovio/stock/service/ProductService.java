@@ -3,6 +3,7 @@ package com.felipemovio.stock.service;
 import com.felipemovio.stock.dto.ProductAtualizarDTO;
 import com.felipemovio.stock.dto.ProductRequestDTO;
 import com.felipemovio.stock.dto.ProductResponseDTO;
+import com.felipemovio.stock.dto.ProductResponseMiniDTO;
 import com.felipemovio.stock.exception.NotFoundException;
 import com.felipemovio.stock.model.Product;
 import com.felipemovio.stock.repository.ProductRepository;
@@ -33,9 +34,9 @@ public class ProductService {
 
 
     // ver itens listas
-    public Page<ProductResponseDTO> verProdutos(Pageable pageable){
+    public Page<ProductResponseMiniDTO> verProdutos(Pageable pageable){
      return repository.findAll(pageable)
-             .map(ProductResponseDTO ::new);
+             .map(ProductResponseMiniDTO ::new);
 
     }
 

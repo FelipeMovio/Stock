@@ -3,6 +3,7 @@ package com.felipemovio.stock.controller;
 import com.felipemovio.stock.dto.ProductAtualizarDTO;
 import com.felipemovio.stock.dto.ProductRequestDTO;
 import com.felipemovio.stock.dto.ProductResponseDTO;
+import com.felipemovio.stock.dto.ProductResponseMiniDTO;
 import com.felipemovio.stock.exception.NotFoundException;
 
 import com.felipemovio.stock.service.ProductService;
@@ -28,8 +29,11 @@ public class ProductController {
     private final ProductService service;
 
     @GetMapping
-    public ResponseEntity<Page<ProductResponseDTO>> verTodosProdutos (@PageableDefault(size = 10) Pageable pageable){
-        Page<ProductResponseDTO> produtos = service.verProdutos(pageable);
+    public ResponseEntity<Page<ProductResponseMiniDTO>> verTodosProdutos (@PageableDefault(size = 10) Pageable pageable){
+        if (pageable.getPageSize() > 50) {
+            throw new IllegalArgumentException("Tamanho máximo da página é 50");
+        }
+        Page<ProductResponseMiniDTO> produtos = service.verProdutos(pageable);
         return ResponseEntity.ok(produtos);
     }
 
