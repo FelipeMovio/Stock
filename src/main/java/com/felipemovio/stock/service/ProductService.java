@@ -74,9 +74,8 @@ public class ProductService {
             atualizado.setQuantity(dto.quantity());
         }
 
-        atualizado.setName(dto.name());
-        atualizado.setPrice(dto.price());
-        atualizado.setQuantity(dto.quantity());
+
+        repository.save(atualizado);
 
         return new ProductResponseDTO(atualizado);
 
