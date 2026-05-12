@@ -1,5 +1,6 @@
 package com.felipemovio.stock.dto;
 
+import com.felipemovio.stock.model.Category;
 import com.felipemovio.stock.model.Product;
 
 import java.math.BigDecimal;
@@ -8,13 +9,15 @@ public record ProductResponseDTO(Integer id,
                                  String name,
                                  Double price,
                                  Integer Stock,
-                                 BigDecimal assessment) {
+                                 BigDecimal assessment,
+                                 Category category) {
     public ProductResponseDTO(Product product) {
         this(product.getId(),
                 product.getName(),
                 product.getPrice(),
                 product.getStock(),
-                product.getAssessment()
+                product.getAssessment(),
+                product.getCategory()
         );
 
     }
