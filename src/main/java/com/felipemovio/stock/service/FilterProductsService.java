@@ -1,6 +1,7 @@
 package com.felipemovio.stock.service;
 
 import com.felipemovio.stock.dto.ProductResponseMiniDTO;
+import com.felipemovio.stock.dto.ProductResponseStatsDTO;
 import com.felipemovio.stock.model.Product;
 import com.felipemovio.stock.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -51,5 +52,17 @@ public class FilterProductsService {
                 stats.getMin(),
                 stats.getMax()
         );
+    }
+
+    // top5 produtos por avaliacao
+    public List<ProductResponseMiniDTO> top5(){
+
+        List<Product> top5 = repository.findTop5ByOrderByAssessmentDesc();
+
+
+        return  top5
+                .stream()
+                .map(ProductResponseMiniDTO::new)
+                .collect(Collectors.toList());
     }
 }
