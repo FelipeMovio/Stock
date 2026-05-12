@@ -28,5 +28,8 @@ public class Product {
     @Column(columnDefinition = "DECIMAL(2,1) CHECK (assessment >= 0 AND assessment <= 5)")
     private BigDecimal assessment;
 
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
 
 }

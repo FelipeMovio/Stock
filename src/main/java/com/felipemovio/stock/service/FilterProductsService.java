@@ -19,6 +19,8 @@ public class FilterProductsService {
 
     private final ProductRepository repository;
 
+
+    // filtragens apenas por stream(), lambdas
     // melhores avaliados
     public List<ProductResponseMiniDTO> melhores(){
         return repository.findAll()
@@ -54,6 +56,7 @@ public class FilterProductsService {
         );
     }
 
+    // filtragens por consultas sql atraves do jpa( spring )
     // top5 produtos por avaliacao
     public List<ProductResponseMiniDTO> top5(){
 
