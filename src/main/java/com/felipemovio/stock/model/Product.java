@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "tb_product")
 @Setter
@@ -18,9 +20,13 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(unique = true)
     private String name;
     private Double price;
-    private Integer quantity;
+    private Integer stock;
+
+    @Column(columnDefinition = "DECIMAL(2,1) CHECK (assessment >= 0 AND assessment <= 5)")
+    private BigDecimal assessment;
 
 
 }

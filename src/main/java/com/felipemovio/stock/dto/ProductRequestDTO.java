@@ -2,14 +2,17 @@ package com.felipemovio.stock.dto;
 
 import com.felipemovio.stock.model.Product;
 
+import java.math.BigDecimal;
+
 public record ProductRequestDTO(
         String name,
         Double price,
-        Integer quantity
+        Integer stock,
+
+
+        BigDecimal assessment
 ) {
-    public ProductRequestDTO(Product product) {
-        this(product.getName(),
-                product.getPrice(),
-                product.getQuantity());
+    public Product toEntity(){
+        return new Product(null,this.name, this.price, this.stock, this.assessment);
     }
 }
