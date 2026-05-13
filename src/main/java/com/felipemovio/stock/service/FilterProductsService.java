@@ -2,6 +2,7 @@ package com.felipemovio.stock.service;
 
 import com.felipemovio.stock.dto.ProductResponseMiniDTO;
 import com.felipemovio.stock.dto.ProductResponseStatsDTO;
+import com.felipemovio.stock.model.Category;
 import com.felipemovio.stock.model.Product;
 import com.felipemovio.stock.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -67,5 +68,15 @@ public class FilterProductsService {
                 .stream()
                 .map(ProductResponseMiniDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    public List<ProductResponseMiniDTO> buscaPorCategoria(Category category){
+
+        List<Product> search = repository.findByProdutos(category);
+
+        return search
+                .stream()
+                .map(ProductResponseMiniDTO ::new)
+                .toList();
     }
 }
