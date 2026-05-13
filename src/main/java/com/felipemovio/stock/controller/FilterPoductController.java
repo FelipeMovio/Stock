@@ -1,14 +1,12 @@
 package com.felipemovio.stock.controller;
 
 import com.felipemovio.stock.dto.ProductResponseMiniDTO;
+import com.felipemovio.stock.exception.NotFoundException;
 import com.felipemovio.stock.model.Category;
 import com.felipemovio.stock.service.FilterProductsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,10 +27,13 @@ public class FilterPoductController {
         return ResponseEntity.ok(filterProductsService.melhoresAndBaratos());
     }
 
-    @GetMapping("/busca/categoria")
-    public ResponseEntity<List<ProductResponseMiniDTO>> porCategoria(@RequestBody Category category){
-        return ResponseEntity.ok(filterProductsService.buscaPorCategoria(category));
+    @GetMapping("/busca/categoria/{category}")
+    public ResponseEntity<List<ProductResponseMiniDTO>> porCategoria(@PathVariable String category) throws NotFoundException {
+
+            Category categoryConvert = Category.valueOf(category.toUpperCase());
+
+            return ResponseEntity.ok(filterProductsService.buscaPorCategoria(categoryConvert));
+
+
     }
-
-
 }

@@ -72,7 +72,7 @@ public class FilterProductsService {
 
     public List<ProductResponseMiniDTO> buscaPorCategoria(Category category){
 
-        List<Product> search = repository.findByProdutos(category);
+        List<Product> search = repository.findByCategory(category);
 
         return search
                 .stream()

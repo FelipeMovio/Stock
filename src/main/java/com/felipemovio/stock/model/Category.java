@@ -20,5 +20,6 @@ public enum Category {
     MOBILIDADE,
     FOTO_VIDEO,
     MODA,
-    PERFUME
+    PERFUME;
+
 }
