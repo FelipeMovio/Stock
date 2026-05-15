@@ -43,20 +43,6 @@ public class FilterProductsService {
                 .collect(Collectors.toList());
     }
 
-    // media das avaliacoes
-    public ProductResponseStatsDTO media(){
-        DoubleSummaryStatistics stats = repository.findAll().stream()
-                .filter(p -> p.getAssessment() != null)
-                .mapToDouble(p -> p.getAssessment().doubleValue())
-                .summaryStatistics();
-
-        return new ProductResponseStatsDTO(
-                stats.getAverage(),
-                stats.getMin(),
-                stats.getMax()
-        );
-    }
-
     // filtragens por consultas sql atraves do jpa( spring )
     // top5 produtos por avaliacao
     public List<ProductResponseMiniDTO> top5(){
