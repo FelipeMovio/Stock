@@ -50,6 +50,7 @@ public class FilterProductsService {
         List<Product> top5 = repository.findTop5ByOrderByAssessmentDesc();
 
 
+
         return  top5
                 .stream()
                 .map(ProductResponseMiniDTO::new)

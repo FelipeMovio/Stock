@@ -30,7 +30,7 @@ public class ProductController {
     private final ProductService service;
 
     @GetMapping
-    public ResponseEntity<Page<ProductResponseMiniDTO>> verTodosProdutos (@PageableDefault(size = 10) Pageable pageable){
+    public ResponseEntity<Page<ProductResponseMiniDTO>> verTodosProdutos (@PageableDefault(size = 10) Pageable pageable) throws PageSizeExceededException{
         Page<ProductResponseMiniDTO> produtos = service.verProdutos(pageable);
         return ResponseEntity.ok(produtos);
     }

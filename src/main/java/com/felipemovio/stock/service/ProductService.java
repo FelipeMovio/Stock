@@ -37,7 +37,7 @@ public class ProductService {
 
 
     // ver itens listas
-    public Page<ProductResponseMiniDTO> verProdutos(Pageable pageable){
+    public Page<ProductResponseMiniDTO> verProdutos(Pageable pageable) throws PageSizeExceededException{
 
         int size = pageable.getPageSize();
 
